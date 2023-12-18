@@ -22,6 +22,14 @@
           "Eyes": "148db08c-865c-4ee9-9582-e2a13a79016c",
           "LookSpeed": 10,
           "MoveSpeed": 400
+        },
+        {
+          "__type": "BuyTool",
+          "__enabled": true,
+          "Eyes": "148db08c-865c-4ee9-9582-e2a13a79016c",
+          "GridSnap": 16,
+          "Product": "prefabs/test_citizen.prefab",
+          "TraceDistance": 600
         }
       ],
       "Children": [
@@ -57,7 +65,7 @@
       "Id": "4bdc5371-8c1a-44b9-80c7-a358056e9b0b",
       "Name": "Plane",
       "Scale": "10,10,1",
-      "Tags": "solid",
+      "Tags": "solid,buildplane",
       "Enabled": true,
       "Components": [
         {
@@ -111,152 +119,29 @@
       ]
     },
     {
-      "Id": "fcc9f663-5682-4dbb-897d-1f23165cf203",
+      "Id": "4c10698f-bb8e-455e-a08a-c118d5c545e3",
       "Name": "Cube",
-      "Position": "84.47487,169.6588,0",
+      "Position": "30.88304,202.5114,0.000008840145",
+      "Rotation": "-0.00000003242851,0.000000000000001024289,-0.5440601,0.8390466",
       "Enabled": true,
       "Components": [
         {
-          "__type": "Ghost",
+          "__type": "SkinnedModelRenderer",
           "__enabled": true,
-          "Ignore": "4bdc5371-8c1a-44b9-80c7-a358056e9b0b"
-        }
-      ],
-      "Children": [
-        {
-          "Id": "f3f1c3be-6831-4c60-a0c7-3deea4d6ee9d",
-          "Name": "Model",
-          "Position": "0,0,25",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "ModelRenderer",
-              "__enabled": true,
-              "BodyGroups": 18446744073709551615,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
+          "BodyGroups": 18446744073709551615,
+          "BoneMergeTarget": null,
+          "CreateBoneObjects": false,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/citizen/citizen.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
         },
         {
-          "Id": "bcec0def-e805-4870-8ba7-32d246e89075",
-          "Name": "Collider",
-          "Position": "0,0,25",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "BoxCollider",
-              "__enabled": true,
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "50,50,50",
-              "Static": false,
-              "Surface": null
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Id": "088471d1-1c0a-4c57-834c-1afe9725ab95",
-      "Name": "Cube (1)",
-      "Position": "-54.94337,177.7097,-0.000008309977",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Ghost",
-          "__enabled": false,
-          "Ignore": "4bdc5371-8c1a-44b9-80c7-a358056e9b0b"
-        }
-      ],
-      "Children": [
-        {
-          "Id": "c51bcff5-8653-4467-a40e-08bf42f7637a",
-          "Name": "Model",
-          "Position": "0,0,25",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "ModelRenderer",
-              "__enabled": true,
-              "BodyGroups": 18446744073709551615,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "Id": "60ff538b-8478-447b-8d48-c4f95aa529fc",
-          "Name": "Collider",
-          "Position": "0,0,25",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "BoxCollider",
-              "__enabled": true,
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "50,50,50",
-              "Static": false,
-              "Surface": null
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "Id": "e69799c7-759c-4e1c-a4b5-3f74cd9721fa",
-      "Name": "Cube (2)",
-      "Position": "214.137,232.255,0.000005557209",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "Ghost",
-          "__enabled": false,
-          "Ignore": "4bdc5371-8c1a-44b9-80c7-a358056e9b0b"
-        }
-      ],
-      "Children": [
-        {
-          "Id": "d6a68395-0f1e-4a6f-bb9b-f2dcf6e58454",
-          "Name": "Model",
-          "Position": "0,0,25",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "ModelRenderer",
-              "__enabled": true,
-              "BodyGroups": 18446744073709551615,
-              "MaterialGroup": null,
-              "MaterialOverride": null,
-              "Model": "models/dev/box.vmdl",
-              "RenderType": "On",
-              "Tint": "1,1,1,1"
-            }
-          ]
-        },
-        {
-          "Id": "a776b071-287b-4eca-93c8-2e3ce3396331",
-          "Name": "Collider",
-          "Position": "0,0,25",
-          "Enabled": true,
-          "Components": [
-            {
-              "__type": "BoxCollider",
-              "__enabled": true,
-              "Center": "0,0,0",
-              "IsTrigger": false,
-              "Scale": "50,50,50",
-              "Static": false,
-              "Surface": null
-            }
-          ]
+          "__type": "ModelPhysics",
+          "__enabled": true,
+          "Model": "models/citizen/citizen.vmdl",
+          "Renderer": "4c10698f-bb8e-455e-a08a-c118d5c545e3"
         }
       ]
     }

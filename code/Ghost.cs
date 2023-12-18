@@ -4,16 +4,24 @@ using System.Linq;
 
 public sealed class Ghost : Component
 {
-	[Property] public GameObject Ignore { get; set; }
+	[Property] public GameObject CurrentBuildplane { get; set; }
+	public bool IsAllowed { get; private set; } = false;
 
 	private static Material _ghostMat = Material.Load( "materials/default/white.vmat" );
+	private Dictionary<Collider, Vector3> _colliderScales = new();
 
 	protected override void OnEnabled()
 	{
-		// Ensure that the colliders have touch enabled before checking for overlap.
-		foreach( var collider in GetColliders )
+		Tags.Add( "ghost" );
+
+		foreach ( var collider in GetColliders )
 		{
+			// Ensure that the colliders have touch enabled before checking for overlap.
 			collider.IsTrigger = true;
+			var oldScale = collider.Transform.LocalScale;
+			_colliderScales[collider] = oldScale;
+			// Ignore just a little bit of clipping.
+			collider.Transform.LocalScale = oldScale * 0.95f;
 		}
 
 		foreach( var renderer in GetRenderers )
@@ -31,10 +39,21 @@ public sealed class Ghost : Component
 
 	protected override void OnDisabled()
 	{
+		Tags.Remove( "ghost" );
+		Tags.Add( "buildplane" );
+
 		foreach( var renderer in GetRenderers )
 		{
 			renderer.MaterialOverride = null;
 			renderer.Tint = Color.White;
+		}
+
+		foreach( var collider in GetColliders )
+		{
+			if ( _colliderScales.ContainsKey( collider ) )
+			{
+				collider.Transform.LocalScale = _colliderScales[collider];
+			}
 		}
 	}
 
@@ -48,7 +67,8 @@ public sealed class Ghost : Component
 
 	protected override void OnUpdate()
 	{
-		ShowAllowed( !CheckTouch() );
+		IsAllowed = !CheckTouch();
+		ShowAllowed( IsAllowed );
 	}
 
 	private bool CheckTouch()
@@ -57,7 +77,7 @@ public sealed class Ghost : Component
 		foreach( var collider in GetColliders )
 		{
 			collider.IsTrigger = true;
-			var validTouches = collider.Touching.Where( c => c.GameObject != Ignore );
+			var validTouches = collider.Touching.Where( c => c.GameObject != CurrentBuildplane );
 			if ( validTouches.Any() )
 			{
 				isTouching = true;

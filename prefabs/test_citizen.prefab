@@ -1,0 +1,38 @@
+{
+  "RootObject": {
+    "Id": "f9de5465-cad8-403c-a7bc-a6c4735c2c8e",
+    "Name": "Test Citizen",
+    "Enabled": true,
+    "Children": [
+      {
+        "Id": "b22ac2ae-0a9e-4383-a293-54418b56af05",
+        "Name": "Citizen",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__enabled": true,
+            "BodyGroups": 18446744073709551615,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/citizen/citizen.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          },
+          {
+            "__type": "ModelCollider",
+            "__enabled": true,
+            "IsTrigger": false,
+            "Model": "models/citizen/citizen.vmdl",
+            "Static": false,
+            "Surface": null
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
