@@ -43,8 +43,8 @@
           "__type": "BuyTool",
           "__enabled": true,
           "Eyes": "148db08c-865c-4ee9-9582-e2a13a79016c",
-          "GridSnap": 16,
-          "Product": "prefabs/test_citizen.prefab",
+          "GridSnap": 8,
+          "Product": "prefabs/test_cubew.prefab",
           "TraceDistance": 600
         }
       ],
@@ -81,7 +81,7 @@
       "Id": "4bdc5371-8c1a-44b9-80c7-a358056e9b0b",
       "Name": "Plane",
       "Scale": "10,10,1",
-      "Tags": "solid,buildplane",
+      "Tags": "solid,buildplane,grid",
       "Enabled": true,
       "Components": [
         {
