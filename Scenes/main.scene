@@ -1,6 +1,22 @@
 {
   "GameObjects": [
     {
+      "Id": "077a5747-b85f-4d00-b9c7-e3fca03b1343",
+      "Name": "Screen",
+      "Position": "2.539715,-319.3538,247.9572",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ScreenPanel",
+          "__enabled": true,
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        }
+      ]
+    },
+    {
       "Id": "ff849f8d-ae17-4ff4-838f-1d5078371152",
       "Name": "Player",
       "Rotation": "-0.00000003191234,0.000000000000007521388,-0.5353999,-0.8445991",
@@ -119,29 +135,15 @@
       ]
     },
     {
-      "Id": "4c10698f-bb8e-455e-a08a-c118d5c545e3",
-      "Name": "Cube",
-      "Position": "30.88304,202.5114,0.000008840145",
-      "Rotation": "-0.00000003242851,0.000000000000001024289,-0.5440601,0.8390466",
+      "Id": "260b4123-acba-4c58-8db2-91ba913d5af9",
+      "Name": "Music",
+      "Position": "2.539715,-319.3538,247.9572",
       "Enabled": true,
       "Components": [
         {
-          "__type": "SkinnedModelRenderer",
+          "__type": "BgmPlayer",
           "__enabled": true,
-          "BodyGroups": 18446744073709551615,
-          "BoneMergeTarget": null,
-          "CreateBoneObjects": false,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/citizen/citizen.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "ModelPhysics",
-          "__enabled": true,
-          "Model": "models/citizen/citizen.vmdl",
-          "Renderer": "4c10698f-bb8e-455e-a08a-c118d5c545e3"
+          "MaxConcurrentTracks": 1
         }
       ]
     }
