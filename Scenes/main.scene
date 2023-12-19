@@ -1,60 +1,99 @@
 {
   "GameObjects": [
     {
-      "Id": "077a5747-b85f-4d00-b9c7-e3fca03b1343",
-      "Name": "Screen",
-      "Position": "2.539715,-319.3538,247.9572",
+      "Id": "50985c72-fec4-48cf-bd58-355bbd47aec5",
+      "Name": "Skybox",
+      "Rotation": "-0.006544801,0.006544801,0.00004283625,0.9999572",
       "Enabled": true,
       "Components": [
         {
-          "__type": "ScreenPanel",
+          "__type": "SkyBox2D",
           "__enabled": true,
-          "AutoScreenScale": true,
-          "Opacity": 1,
-          "Scale": 1,
-          "ZIndex": 100
+          "SkyMaterial": "raw/starmapmilkyway.vmat",
+          "Tint": "0.02463,0.02466,0.02475,1"
+        },
+        {
+          "__type": "SkyScroller",
+          "__enabled": true,
+          "ScrollFactor": 0.003,
+          "Target": "f420d6b9-e323-4efe-b1fb-1ac54134cac0"
         }
       ]
     },
     {
-      "Id": "ff849f8d-ae17-4ff4-838f-1d5078371152",
-      "Name": "Player",
-      "Rotation": "-0.00000003191234,0.000000000000007521388,-0.5353999,-0.8445991",
+      "Id": "5006bd90-e749-4329-a52f-f676bfc80725",
+      "Name": "Sun",
+      "Position": "200,0,0",
+      "Rotation": "-0.3936001,0.3763543,0.4468399,0.7097672",
       "Enabled": true,
       "Components": [
         {
-          "__type": "CharacterController",
+          "__type": "DirectionalLight",
           "__enabled": true,
-          "Acceleration": 10,
-          "GroundAngle": 45,
-          "Height": 64,
-          "IgnoreLayers": "solid",
-          "Radius": 16,
-          "StepHeight": 18
+          "LightColor": "0.11386,0.11386,0.11386,1",
+          "Shadows": true,
+          "SkyColor": "0.00392,0.00392,0.00392,1"
+        }
+      ]
+    },
+    {
+      "Id": "f420d6b9-e323-4efe-b1fb-1ac54134cac0",
+      "Name": "Ship",
+      "Position": "250,250,-0.0003515341",
+      "Tags": "player,ship,solid",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Rigidbody",
+          "__enabled": true,
+          "AngularDamping": 0,
+          "Gravity": false,
+          "LinearDamping": 0
         },
         {
-          "__type": "NoclipController",
+          "__type": "ShipController",
           "__enabled": true,
-          "Eyes": "148db08c-865c-4ee9-9582-e2a13a79016c",
-          "LookSpeed": 10,
-          "MoveSpeed": 400
+          "PartsContainer": "c874c91b-fa93-44dd-a28f-0296f3426330",
+          "RetrorocketForceScale": 150,
+          "Rigidbody": "f420d6b9-e323-4efe-b1fb-1ac54134cac0",
+          "Speed": 100
         },
         {
-          "__type": "BuyTool",
+          "__type": "ShipDebug",
           "__enabled": true,
-          "CursorLight": "prefabs/cursor_light.prefab",
-          "Eyes": "148db08c-865c-4ee9-9582-e2a13a79016c",
-          "GridSnap": 8,
-          "Product": "prefabs/test_cubew.prefab",
-          "TraceDistance": 600
+          "UpdateInterval": 0.5
+        },
+        {
+          "__type": "PlaneConstraint",
+          "__enabled": true,
+          "Rigidbody": null
+        },
+        {
+          "__type": "Jettison",
+          "__enabled": true,
+          "EjectionSource": "0556d2e7-4a01-49e4-8fda-bb2b1f3a8cae",
+          "EjectionSpeed": 300,
+          "EjectionSpin": 5,
+          "Prefab": "prefabs/obstacles/lightball.prefab"
+        },
+        {
+          "__type": "FloatingOriginPlayer",
+          "__enabled": true,
+          "WorldResetDistance": 16000
+        },
+        {
+          "__type": "Teleporter",
+          "__enabled": true,
+          "AbsoluteDestination": "0,0,0"
         }
       ],
       "Children": [
         {
-          "Id": "148db08c-865c-4ee9-9582-e2a13a79016c",
+          "Id": "4014bc3a-0475-4e40-9f41-2793f567762a",
           "Name": "Camera",
-          "Position": "0,0,72",
-          "Tags": "maincamera",
+          "Position": "0,-0.000000009572649,600",
+          "Rotation": "0,0.707107,0,0.7071065",
+          "Tags": "player,ship,solid",
           "Enabled": true,
           "Components": [
             {
@@ -73,16 +112,263 @@
               "Viewport": "0,0,1,1",
               "ZFar": 10000,
               "ZNear": 10
+            },
+            {
+              "__type": "ShipCamera",
+              "__enabled": true,
+              "HighPitch": 88,
+              "HighPosition": "-120,0,1500",
+              "LowPitch": 70,
+              "LowPosition": "-230,0,600",
+              "PitchLerpSpeed": 1,
+              "PositionLerpSpeed": 1,
+              "Target": "f420d6b9-e323-4efe-b1fb-1ac54134cac0",
+              "TargetVelocityHighThreshold": 2500,
+              "TargetVelocityLowThreshold": 200
+            }
+          ]
+        },
+        {
+          "Id": "c874c91b-fa93-44dd-a28f-0296f3426330",
+          "Name": "Parts",
+          "Position": "0,0,0",
+          "Tags": "player,ship,solid",
+          "Enabled": true,
+          "Children": [
+            {
+              "Id": "47c8e566-aaf4-42de-8964-bd66500ba360",
+              "Name": "Cockpit",
+              "Position": "29.73928,0.000000004105452,-0.00000000000000001666383",
+              "Scale": "0.5,0.6,0.5",
+              "Tags": "player,ship,solid",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "ModelRenderer",
+                  "__enabled": true,
+                  "BodyGroups": 18446744073709551615,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/dev/sphere.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ],
+              "Children": [
+                {
+                  "Id": "24779972-924f-4dd1-8fdf-8d4f5777974e",
+                  "Name": "Forward Retrorocket",
+                  "Position": "33.33148,0,0",
+                  "Scale": "2,0.016,0.006750001",
+                  "Tags": "player,ship,solid",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Thruster",
+                      "__enabled": true,
+                      "Controller": "f420d6b9-e323-4efe-b1fb-1ac54134cac0",
+                      "EffectPrefab": "prefabs/effects/thruster_fire.prefab",
+                      "LifetimeScale": 0.1,
+                      "Retrorocket": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Id": "acbd1984-0908-45d0-869a-d75e9caf1813",
+              "Name": "Main Hull",
+              "Position": "0,0,0",
+              "Scale": "1,0.4,0.4",
+              "Tags": "player,ship,solid",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "ModelRenderer",
+                  "__enabled": true,
+                  "BodyGroups": 18446744073709551615,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/dev/box.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ]
+            },
+            {
+              "Id": "9f1aba35-eea9-427d-a148-b3f28c9efd4e",
+              "Name": "Rear Beam",
+              "Position": "-23.33452,0.00000003136669,8.521406",
+              "Scale": "0.3,1,0.2",
+              "Tags": "player,ship,solid",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "ModelRenderer",
+                  "__enabled": true,
+                  "BodyGroups": 18446744073709551615,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/dev/box.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ]
+            },
+            {
+              "Id": "6de72c4a-2b68-434d-ae98-a5e1d4d006e6",
+              "Name": "Left Nacelle",
+              "Position": "-22.16811,17.26161,17.39656",
+              "Scale": "1,0.2,0.15",
+              "Tags": "player,ship,solid",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "ModelRenderer",
+                  "__enabled": true,
+                  "BodyGroups": 18446744073709551615,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/dev/box.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ],
+              "Children": [
+                {
+                  "Id": "e2d98aa4-d297-4143-8df8-dd37afe56a65",
+                  "Name": "Main Thruster",
+                  "Position": "-27.48664,0,0",
+                  "Rotation": "-0.00000005470048,0.00000001637869,-1,-0.0000006397578",
+                  "Tags": "player,ship,solid",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Thruster",
+                      "__enabled": true,
+                      "Controller": "f420d6b9-e323-4efe-b1fb-1ac54134cac0",
+                      "EffectPrefab": "prefabs/effects/thruster_fire.prefab",
+                      "LifetimeScale": 3,
+                      "Retrorocket": false
+                    }
+                  ]
+                },
+                {
+                  "Id": "dec56a65-fc98-4d1e-a782-d6d8776c4614",
+                  "Name": "Left Retrorocket",
+                  "Position": "17.35204,30.23171,0",
+                  "Rotation": "0.00000004807746,-0.00000003368148,0.707107,0.7071065",
+                  "Scale": "1,0.2,0.15",
+                  "Tags": "player,ship,solid",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Thruster",
+                      "__enabled": true,
+                      "Controller": "f420d6b9-e323-4efe-b1fb-1ac54134cac0",
+                      "EffectPrefab": "prefabs/effects/thruster_fire.prefab",
+                      "LifetimeScale": 0.1,
+                      "Retrorocket": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Id": "d26c9337-fa69-4c79-acd1-a19f11447962",
+              "Name": "Right Nacelle",
+              "Position": "-22.16811,-18.48013,17.39656",
+              "Scale": "1,0.2,0.15",
+              "Tags": "player,ship,solid",
+              "Enabled": true,
+              "Components": [
+                {
+                  "__type": "ModelRenderer",
+                  "__enabled": true,
+                  "BodyGroups": 18446744073709551615,
+                  "MaterialGroup": null,
+                  "MaterialOverride": null,
+                  "Model": "models/dev/box.vmdl",
+                  "RenderType": "On",
+                  "Tint": "1,1,1,1"
+                }
+              ],
+              "Children": [
+                {
+                  "Id": "c6539304-6340-446b-9872-b308b2d53b1e",
+                  "Name": "Main Thruster",
+                  "Position": "-27.48664,0,0",
+                  "Rotation": "-0.00000005470048,0.00000001637869,-1,-0.0000006397578",
+                  "Scale": "1,0.04,0.0225",
+                  "Tags": "player,ship,solid",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Thruster",
+                      "__enabled": true,
+                      "Controller": "f420d6b9-e323-4efe-b1fb-1ac54134cac0",
+                      "EffectPrefab": "prefabs/effects/thruster_fire.prefab",
+                      "LifetimeScale": 3,
+                      "Retrorocket": false
+                    }
+                  ]
+                },
+                {
+                  "Id": "fb4d4d7d-b63c-4ee8-ad61-8970d3b0a4b7",
+                  "Name": "Right Retrorocket",
+                  "Position": "17.35204,-36.951,0",
+                  "Rotation": "-0.00000003368153,-0.00000004807748,-0.707107,0.7071065",
+                  "Scale": "1,0.008,0.003375",
+                  "Tags": "player,ship,solid",
+                  "Enabled": true,
+                  "Components": [
+                    {
+                      "__type": "Thruster",
+                      "__enabled": true,
+                      "Controller": "f420d6b9-e323-4efe-b1fb-1ac54134cac0",
+                      "EffectPrefab": "prefabs/effects/thruster_fire.prefab",
+                      "LifetimeScale": 0.1,
+                      "Retrorocket": true
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Id": "0556d2e7-4a01-49e4-8fda-bb2b1f3a8cae",
+              "Name": "Ejection Source",
+              "Position": "-69.42393,-0.00007347894,0",
+              "Rotation": "0,0,1,-0.0000006397578",
+              "Tags": "player,ship,solid",
+              "Enabled": true
+            }
+          ]
+        },
+        {
+          "Id": "2e66ea98-6497-46ec-b4ba-99bcb119379c",
+          "Name": "Collider",
+          "Position": "0,0,0",
+          "Tags": "player,ship,solid",
+          "Enabled": true,
+          "Components": [
+            {
+              "__type": "SphereCollider",
+              "__enabled": true,
+              "Center": "0,0,0",
+              "IsTrigger": false,
+              "Radius": 57.53339,
+              "Static": false,
+              "Surface": null
             }
           ]
         }
       ]
     },
     {
-      "Id": "4bdc5371-8c1a-44b9-80c7-a358056e9b0b",
+      "Id": "b95bc5b6-db79-4b7b-9cb5-c9d2b127a0ac",
       "Name": "Plane",
-      "Scale": "10,10,1",
-      "Tags": "solid,buildplane,grid",
+      "Position": "1000,1000,-100",
+      "Scale": "20,20,20",
       "Enabled": true,
       "Components": [
         {
@@ -94,57 +380,6 @@
           "Model": "models/dev/plane.vmdl",
           "RenderType": "On",
           "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "BoxCollider",
-          "__enabled": true,
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "100,100,0.25",
-          "Static": false,
-          "Surface": null
-        }
-      ]
-    },
-    {
-      "Id": "47e5441b-2abe-47bb-a7ad-9f1f08b1ecbd",
-      "Name": "Sun",
-      "Position": "23.17903,120.2565,5.858871",
-      "Rotation": "-0.03595976,0.4469008,-0.07169209,0.8909806",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "DirectionalLight",
-          "__enabled": true,
-          "LightColor": "0.91373,0.98039,1,1",
-          "Shadows": true,
-          "SkyColor": "0.05882,0.07451,0.08235,1"
-        }
-      ]
-    },
-    {
-      "Id": "6c5f6bd1-2bc2-4fed-abea-418d2f5cccce",
-      "Name": "Skybox",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "SkyBox2D",
-          "__enabled": true,
-          "SkyMaterial": "materials/skybox/lilienstein.vmat",
-          "Tint": "1,1,1,1"
-        }
-      ]
-    },
-    {
-      "Id": "260b4123-acba-4c58-8db2-91ba913d5af9",
-      "Name": "Music",
-      "Position": "2.539715,-319.3538,247.9572",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "BgmPlayer",
-          "__enabled": true,
-          "MaxConcurrentTracks": 1
         }
       ]
     }
@@ -153,7 +388,7 @@
     "FixedUpdateFrequency": 50,
     "Lerping": true,
     "MaxFixedUpdates": 5,
-    "NetworkFrequency": 30,
+    "NetworkFrequency": 60,
     "ThreadedAnimation": true,
     "TimeScale": 1,
     "UseFixedUpdate": true
@@ -161,6 +396,6 @@
   "Title": "main",
   "Description": "",
   "__references": [
-    "polyhaven.lilienstein"
+    "dopamine.starmapmilkyway"
   ]
 }

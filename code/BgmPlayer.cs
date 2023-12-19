@@ -5,11 +5,17 @@ using System.Linq;
 
 public sealed class BgmPlayer : Component
 {
-	[Property] public int MaxConcurrentTracks { get; set; } = 1;
+	[Property] public float PlaybackPosition => _musicPlayer?.PlaybackTime ?? 0;
+	[Property] public float Volume => _musicPlayer?.Volume ?? 0;
+	[Property] public string Track => _trackInfo?.Title;
+	[Property] public string Artist => _trackInfo?.Artist;
+	[Property] public string License => _trackInfo?.License;
+
 
 	private List<BgmTrack> _allTracks = new();
 	private List<BgmTrack> _trackList = new();
-	private List<MusicPlayer> _musicPlayers = new();
+	private MusicPlayer _musicPlayer;
+	private BgmTrack _trackInfo;
 
 	protected override void OnStart()
 	{
@@ -43,21 +49,17 @@ public sealed class BgmPlayer : Component
 
 	private void PlayTrack( BgmTrack track )
 	{
-		while ( _musicPlayers.Count >= MaxConcurrentTracks )
-		{
-			var oldestTrack = _musicPlayers[0];
-			oldestTrack.Stop();
-			_musicPlayers.RemoveAt( 0 );
-		}
+		_musicPlayer?.Stop();
 		var musicPlayer = MusicPlayer.Play( FileSystem.Mounted, track.AudioTrack );
 		musicPlayer.ListenLocal = true;
 		musicPlayer.Volume = 0.2f * track.Volume;
 		musicPlayer.OnFinished = () =>
 		{
-			Log.Info( "FINISHED" );
-			_musicPlayers.Remove( musicPlayer );
+			_musicPlayer?.Stop();
+			_trackInfo = null;
 			PlayNext();
 		};
-		_musicPlayers.Add( musicPlayer );
+		_musicPlayer = musicPlayer;
+		_trackInfo = track;
 	}
 }
