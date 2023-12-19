@@ -1,0 +1,19 @@
+{
+  "RootObject": {
+    "Id": "f96308a5-9504-4315-9fc7-ff3fed3e3209",
+    "Name": "cursor_light",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "PointLight",
+        "__enabled": true,
+        "LightColor": "0.19802,0.19802,0.19802,1",
+        "Radius": 200
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}

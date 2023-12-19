@@ -9,6 +9,7 @@ public sealed class Ghost : Component
 
 	private static Material _ghostMat = Material.Load( "materials/default/white.vmat" );
 	private Dictionary<Collider, Vector3> _colliderScales = new();
+	private Dictionary<ModelRenderer, ModelRenderer.ShadowRenderType> _rendererShadows = new();
 
 	protected override void OnEnabled()
 	{
@@ -27,6 +28,8 @@ public sealed class Ghost : Component
 		foreach( var renderer in GetRenderers )
 		{
 			renderer.MaterialOverride = _ghostMat;
+			_rendererShadows[renderer] = renderer.RenderType;
+			renderer.RenderType = ModelRenderer.ShadowRenderType.Off;
 		}
 
 		ShowAllowed( false );
@@ -55,6 +58,15 @@ public sealed class Ghost : Component
 				collider.Transform.LocalScale = _colliderScales[collider];
 			}
 		}
+		foreach( var renderer in GetRenderers )
+		{
+			if ( _rendererShadows.ContainsKey( renderer ) )
+			{
+				renderer.RenderType = _rendererShadows[renderer];
+			}
+		}
+		_colliderScales.Clear();
+		_rendererShadows.Clear();
 	}
 
 	private void ShowAllowed( bool isAllowed )

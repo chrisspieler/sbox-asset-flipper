@@ -4,18 +4,19 @@ using System;
 public sealed class BuyTool : Component
 {
 	[Property] public GameObject Product { get; set; }
+	[Property] public GameObject CursorLight { get; set; }
 	[Property] public GameObject Eyes { get; set; }
 	[Property] public float TraceDistance { get; set; } = 600f;
 	[Property, Range(1, 256, 1)] public int GridSnap { get; set; } = 16;
 
 	private Ghost _ghost;
+	private GameObject _activeCursorLight;
 
 	protected override void OnUpdate()
 	{
 		if ( Product == null || !TryRunTrace( out var tr ) )
 		{
-			_ghost?.GameObject?.Destroy();
-			_ghost = null;
+			DestroyGhost();
 			return;
 		}
 		if ( _ghost is null )
@@ -38,6 +39,19 @@ public sealed class BuyTool : Component
 		var ghostGo = SceneUtility.Instantiate( Product );
 		_ghost = ghostGo.Components.GetOrCreate<Ghost>();
 		_ghost.Enabled = true;
+		if ( CursorLight != null )
+		{
+			_activeCursorLight = SceneUtility.Instantiate( CursorLight );
+			_activeCursorLight.SetParent( _ghost.GameObject );
+			_activeCursorLight.Transform.LocalPosition += Vector3.Up * 20f;
+		}
+	}
+
+	private void DestroyGhost()
+	{
+		_activeCursorLight?.Destroy();
+		_ghost?.GameObject?.Destroy();
+		_ghost = null;
 	}
 
 	private bool TryRunTrace( out SceneTraceResult tr )
@@ -111,5 +125,6 @@ public sealed class BuyTool : Component
 		// Delete just the component, leaving the GameObject intact.
 		_ghost.Destroy();
 		_ghost = null;
+		_activeCursorLight?.Destroy();
 	}
 }

@@ -42,6 +42,7 @@
         {
           "__type": "BuyTool",
           "__enabled": true,
+          "CursorLight": "prefabs/cursor_light.prefab",
           "Eyes": "148db08c-865c-4ee9-9582-e2a13a79016c",
           "GridSnap": 8,
           "Product": "prefabs/test_cubew.prefab",
