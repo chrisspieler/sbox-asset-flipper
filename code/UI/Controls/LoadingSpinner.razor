@@ -1,0 +1,53 @@
+﻿@using System;
+@using System.Collections.Immutable;
+@using Sandbox;
+@using Sandbox.UI;
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+    <div class="spinner" @ref=@Spinner></div>
+</root>
+
+@code {
+    public string SpinnerImage 
+    {
+        get => _spinnerImage;
+        set
+        {
+            _spinnerImage = value;
+            Spinner.Style.SetBackgroundImage( value );
+        }
+    }
+    private string _spinnerImage = "ui/loading_spinner.png";
+    public float RotationSpeed { get; set; } = 1f;
+
+    private Panel Spinner { get; set; }
+    private float _currentRotationDegrees;
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        if (!firstTime)
+            return;
+
+        Spinner.Style.SetBackgroundImage( SpinnerImage );
+    }
+
+    public override void Tick()
+    {
+        _currentRotationDegrees += Time.Delta * RotationSpeed;
+        if ( _currentRotationDegrees > 360f )
+        {
+            _currentRotationDegrees -= 360f;
+        }
+        var rotationEntry = new PanelTransform.Entry()
+        {
+            Type = PanelTransform.EntryType.Rotation,
+                Z = _currentRotationDegrees
+        };
+        var entryList = new[] { rotationEntry }.ToImmutableList();
+        Spinner.Style.Transform = new PanelTransform() { List = entryList };
+    }
+}

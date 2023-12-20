@@ -1,0 +1,87 @@
+﻿@using System;
+@using System.Linq;
+@using System.Threading;
+@using System.Threading.Tasks;
+@using Sandbox;
+@using Sandbox.UI;
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+    @if ( IsLoading )
+    {
+        <div class="loading"/>
+        return;
+    }
+    @foreach (var package in FindResult.Packages)
+    {
+        
+    }
+</root>
+
+@code
+{
+    public string Query 
+    {
+        get => _query;
+        set
+        {
+            var oldQuery = _query;
+            _query = value;
+            if ( oldQuery != _query )
+            {
+                RefreshPackages();
+            }
+        }
+    }
+    private string _query;
+
+    public Package Selection 
+    {
+        get => _selection;
+        set
+        {
+            var oldSelection = _selection;
+            _selection = value;
+            if ( oldSelection != _selection )
+            {
+                SelectionChanged?.Invoke(_selection);
+            }
+        }
+    }
+    private Package _selection;
+
+    public bool IsLoading { get; private set; }
+    private Package.FindResult FindResult { get; set; }
+    /// <summary>
+    /// Invoked when the selected asset changes. The new selection will be
+    /// used as an argument.
+    /// </summary>
+    public Action<Package> SelectionChanged { get; set; }
+
+    private CancellationTokenSource _cancelSource;
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        if (!firstTime)
+            return;
+
+        RefreshPackages();
+    }
+
+    private async Task RefreshPackages( )
+    {
+        _cancelSource?.Cancel();
+        _cancelSource = new();
+        IsLoading = true;
+        FindResult = await Package.FindAsync( Query, token: _cancelSource.Token );
+        IsLoading = false;
+    }
+
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine( Query, IsLoading, Selection );
+}
