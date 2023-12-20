@@ -5,6 +5,7 @@ using System.Linq;
 
 public sealed class BgmPlayer : Component
 {
+	[Property] public BgmTrackList CurrentTrackList { get; set; }
 	[Property] public float PlaybackPosition => _musicPlayer?.PlaybackTime ?? 0;
 	[Property] public float Volume => _musicPlayer?.Volume ?? 0;
 	[Property] public string Track => _trackInfo?.Title;
@@ -12,14 +13,12 @@ public sealed class BgmPlayer : Component
 	[Property] public string License => _trackInfo?.License;
 
 
-	private List<BgmTrack> _allTracks = new();
-	private List<BgmTrack> _trackList = new();
+	private List<BgmTrack> _queue = new();
 	private MusicPlayer _musicPlayer;
 	private BgmTrack _trackInfo;
 
 	protected override void OnStart()
 	{
-		_allTracks = ResourceLibrary.GetAll<BgmTrack>().ToList();
 		PlayNext();
 	}
 
@@ -33,17 +32,15 @@ public sealed class BgmPlayer : Component
 
 	public void PlayNext()
 	{
-		if ( !_trackList.Any() )
-		{
-			_trackList = _allTracks.OrderBy( _ => Guid.NewGuid() ).ToList();
-		}
-		if ( !_trackList.Any() )
-		{
-			Log.Error( "No BGM tracks loaded." );
+		if ( CurrentTrackList is null || CurrentTrackList.Tracks?.Any() != true )
 			return;
+
+		if ( !_queue.Any() )
+		{
+			_queue = CurrentTrackList.Tracks.OrderBy( _ => Guid.NewGuid() ).ToList();
 		}
-		var track = _trackList[0];
-		_trackList.RemoveAt( 0 );
+		var track = _queue[0];
+		_queue.RemoveAt( 0 );
 		PlayTrack( track );
 	}
 

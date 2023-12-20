@@ -144,7 +144,12 @@
         {
           "__type": "BgmPlayer",
           "__enabled": true,
-          "MaxConcurrentTracks": 1
+          "Artist": null,
+          "CurrentTrackList": "music/flippercore.tracklst",
+          "License": null,
+          "PlaybackPosition": 0,
+          "Track": null,
+          "Volume": 0
         }
       ]
     }
