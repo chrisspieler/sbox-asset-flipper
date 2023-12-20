@@ -13,6 +13,11 @@
           "Opacity": 1,
           "Scale": 1,
           "ZIndex": 100
+        },
+        {
+          "__type": "ModelBrowser",
+          "__enabled": true,
+          "MyStringValue": "Hello World!"
         }
       ]
     },

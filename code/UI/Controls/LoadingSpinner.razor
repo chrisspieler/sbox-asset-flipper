@@ -5,8 +5,8 @@
 @attribute [StyleSheet]
 @inherits Panel
 
-<root>
-    <div class="spinner" @ref=@Spinner></div>
+<root style="transform: translate(-50%, -50%) rotateZ(@_currentRotationDegrees);">
+
 </root>
 
 @code {
@@ -16,13 +16,13 @@
         set
         {
             _spinnerImage = value;
-            Spinner.Style.SetBackgroundImage( value );
+            Style.SetBackgroundImage( value );
         }
     }
     private string _spinnerImage = "ui/loading_spinner.png";
-    public float RotationSpeed { get; set; } = 1f;
+    public float RotationSpeed { get; set; } = 270f;
 
-    private Panel Spinner { get; set; }
+    public Panel Spinner { get; set; }
     private float _currentRotationDegrees;
 
     protected override void OnAfterTreeRender(bool firstTime)
@@ -32,7 +32,7 @@
         if (!firstTime)
             return;
 
-        Spinner.Style.SetBackgroundImage( SpinnerImage );
+        Style.SetBackgroundImage( SpinnerImage );
     }
 
     public override void Tick()
@@ -42,12 +42,6 @@
         {
             _currentRotationDegrees -= 360f;
         }
-        var rotationEntry = new PanelTransform.Entry()
-        {
-            Type = PanelTransform.EntryType.Rotation,
-                Z = _currentRotationDegrees
-        };
-        var entryList = new[] { rotationEntry }.ToImmutableList();
-        Spinner.Style.Transform = new PanelTransform() { List = entryList };
+        StateHasChanged();
     }
 }
