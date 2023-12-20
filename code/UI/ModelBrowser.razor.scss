@@ -2,5 +2,13 @@ ModelBrowser
 {
 	width: 100%;
 	height: 100%;
+	pointer-events: all;
 
+	AssetPicker {
+		position: absolute;
+		top: 15%;
+		left: 15%;
+		width: 70%;
+		height: 70%;
+	}
 }

@@ -16,8 +16,7 @@
         },
         {
           "__type": "ModelBrowser",
-          "__enabled": true,
-          "MyStringValue": "Hello World!"
+          "__enabled": true
         }
       ]
     },
@@ -45,12 +44,17 @@
           "MoveSpeed": 400
         },
         {
+          "__type": "MenuController",
+          "__enabled": true,
+          "ModelMenu": "077a5747-b85f-4d00-b9c7-e3fca03b1343"
+        },
+        {
           "__type": "BuyTool",
           "__enabled": true,
           "CursorLight": "prefabs/cursor_light.prefab",
           "Eyes": "148db08c-865c-4ee9-9582-e2a13a79016c",
           "GridSnap": 8,
-          "Product": "prefabs/test_cubew.prefab",
+          "Product": "prefabs/16beam.prefab",
           "TraceDistance": 600
         }
       ],
@@ -155,6 +159,25 @@
           "PlaybackPosition": 0,
           "Track": null,
           "Volume": 0
+        }
+      ]
+    },
+    {
+      "Id": "9525339e-2b69-4979-a38d-ee48bd444b5e",
+      "Name": "Object",
+      "Position": "0,0,72",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "EnvmapProbe",
+          "__enabled": true,
+          "Bounds": {
+            "Mins": "-500,-500,-72",
+            "Maxs": "500,500,200"
+          },
+          "Projection": "Sphere",
+          "Texture": "textures/cubemaps/default2.vtex",
+          "TintColor": "1,1,1,1"
         }
       ]
     }

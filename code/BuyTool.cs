@@ -3,7 +3,21 @@ using System;
 
 public sealed class BuyTool : Component
 {
-	[Property] public GameObject Product { get; set; }
+	[Property] public GameObject Product 
+	{
+		get => _product;
+		set
+		{
+			// Make sure we don't leave template GameObjects lying around.
+			if ( _product.IsValid() && !_product.IsPrefabInstance )
+			{
+				_product.Destroy();
+			}
+			_product = value;
+			DestroyGhost();
+		}
+	}
+	private GameObject _product;
 	[Property] public GameObject CursorLight { get; set; }
 	[Property] public GameObject Eyes { get; set; }
 	[Property] public float TraceDistance { get; set; } = 600f;
@@ -39,6 +53,7 @@ public sealed class BuyTool : Component
 		var ghostGo = SceneUtility.Instantiate( Product );
 		_ghost = ghostGo.Components.GetOrCreate<Ghost>();
 		_ghost.Enabled = true;
+		ghostGo.Enabled = true;
 		if ( CursorLight != null )
 		{
 			_activeCursorLight = SceneUtility.Instantiate( CursorLight );

@@ -10,12 +10,15 @@
 <root>
     @if ( IsLoading )
     {
-        <div class="loading"/>
+        <LoadingSpinner/>
         return;
     }
     @foreach (var package in FindResult.Packages)
     {
-        
+        <div onclick=@(() => Selection = package) class="package-card @(Selection == package ? "selected" : "")">
+            <p class="title">@package.Title</p>
+            <ImagePanel ImagePath=@package.Thumb/>
+        </div>
     }
 </root>
 

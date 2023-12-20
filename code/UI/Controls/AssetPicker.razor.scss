@@ -1,0 +1,37 @@
+﻿AssetPicker {
+    background-color: #8d94a155;
+    flex-wrap: wrap;
+    padding: 10px;
+    overflow: scroll;
+
+    .package-card {
+        background-color: #2B3A5B;
+        flex-direction: column;
+        flex-basis: 18.2%;
+        margin: 10px;
+        border-radius: 20px;
+        border: 5px solid transparent;
+
+        &.selected {
+            border: 5px solid #FFD700;
+        }
+
+        .title {
+            position: absolute;
+            top: 5px;
+            color: white;
+            overflow: clip;
+            z-index: 1;
+            font-size: 24px;
+            font-family: Poppins;
+            text-shadow: 3px 3px 3px black;
+            margin-left: 10px;
+        }
+
+        ImagePanel {
+            height: 250px;
+            width: 100%;
+            border-radius: 20px;
+        }
+    }
+}

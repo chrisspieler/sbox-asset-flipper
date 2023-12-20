@@ -1,18 +1,51 @@
+@using System.Linq;
+@using System.Threading.Tasks;
 @using Sandbox;
 @using Sandbox.UI;
 @inherits PanelComponent
 
 <root>
-    <LoadingSpinner/>
-    <!-- <AssetPicker Query="sort:popular type:model"/> -->
+    <AssetPicker @ref=Picker  Query="sort:latest type:model"/>
 </root>
 
 @code
 {
-	[Property] public string MyStringValue { get; set; } = "Hello World!";
+    private AssetPicker Picker { get; set; }
 
-	/// <summary>
-	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
-	/// </summary>
-	protected override int BuildHash() => System.HashCode.Combine( MyStringValue );
+    private bool _pickerLoaded = false;
+
+    protected override void OnEnabled()
+    {
+        base.OnEnabled();
+
+        Picker = null;
+        _pickerLoaded = false;
+    }
+
+    protected override void OnUpdate()
+    {
+        if ( !_pickerLoaded && Picker is not null)
+        {
+            Picker.SelectionChanged += SelectModel;
+            _pickerLoaded = true;
+        }
+    }
+
+    private async void SelectModel( Package modelPackage)
+    {
+        // TODO: Don't mutate game state directly from the UI. Use something like a ConCmd.
+        var buyTool = Scene.GetAllComponents<BuyTool>().FirstOrDefault();
+        if ( !buyTool.IsValid() )
+            return;
+
+        var modelGo = await AssetTemplate.GetModel( modelPackage );
+        buyTool.Product = modelGo;
+        // Close this menu.
+        Enabled = false;
+    }
+
+    /// <summary>
+    /// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+    /// </summary>
+    protected override int BuildHash() => System.HashCode.Combine( 1 );
 }
