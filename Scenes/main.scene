@@ -16,7 +16,8 @@
         },
         {
           "__type": "ModelBrowser",
-          "__enabled": false
+          "__enabled": false,
+          "BuyTool": "ff849f8d-ae17-4ff4-838f-1d5078371152"
         },
         {
           "__type": "ToolInfoPanel",
@@ -50,6 +51,7 @@
         {
           "__type": "MenuController",
           "__enabled": true,
+          "BuyTool": "ff849f8d-ae17-4ff4-838f-1d5078371152",
           "ModelMenu": "077a5747-b85f-4d00-b9c7-e3fca03b1343"
         },
         {

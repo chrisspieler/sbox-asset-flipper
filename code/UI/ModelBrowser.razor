@@ -10,6 +10,8 @@
 
 @code
 {
+    [Property] public BuyTool BuyTool { get; set; }
+
     private AssetPicker Picker { get; set; }
 
     private bool _pickerLoaded = false;
@@ -33,13 +35,10 @@
 
     private async void SelectModel( Package modelPackage)
     {
-        // TODO: Don't mutate game state directly from the UI. Use something like a ConCmd.
-        var buyTool = Scene.GetAllComponents<BuyTool>().FirstOrDefault();
-        if ( !buyTool.IsValid() )
-            return;
-
         var modelGo = await AssetTemplate.GetModel( modelPackage );
-        buyTool.Product = modelGo;
+        // TODO: Don't mutate game state directly from the UI. Use something like a ConCmd.
+        BuyTool.Enabled = true;
+        BuyTool.Product = modelGo;
         // Close this menu.
         Enabled = false;
     }
