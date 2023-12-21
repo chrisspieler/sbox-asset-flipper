@@ -36,7 +36,8 @@ public sealed class BuyTool : Component
 	{
 		var glyphList = new List<InputGlyphData>()
 		{
-			new InputGlyphData { InputAction = "attack1", Description = "Place Product" }
+			new InputGlyphData { InputAction = "attack1", Description = "Place Product" },
+			new InputGlyphData { InputAction = "score", Description = "Open Shop" }
 		};
 		ToolPanel.SetTool( TOOL_NAME, "Place assets in the world.", glyphList );
 	}

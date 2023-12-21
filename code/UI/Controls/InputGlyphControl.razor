@@ -19,6 +19,8 @@
             return;
 
         GlyphTexture.Texture = Input.GetGlyph( InputAction );
+        GlyphTexture.Style.Width = Length.Pixels( GlyphTexture.Texture.Width );
+        GlyphTexture.Style.Height = Length.Pixels( GlyphTexture.Texture.Height );
         
         StateHasChanged();
     }
