@@ -9,7 +9,7 @@ public sealed class BuyTool : Component
 		set
 		{
 			// Make sure we don't leave template GameObjects lying around.
-			if ( _product.IsValid() && !_product.IsPrefabInstance )
+			if ( _product.IsValid() )
 			{
 				_product.Destroy();
 			}
@@ -22,9 +22,11 @@ public sealed class BuyTool : Component
 	[Property] public GameObject Eyes { get; set; }
 	[Property] public float TraceDistance { get; set; } = 600f;
 	[Property, Range(1, 256, 1)] public int GridSnap { get; set; } = 16;
+	[Property, Range( 1, 90, 1 )] public float RotationSnap { get; set; } = 30f;
 
 	private Ghost _ghost;
 	private GameObject _activeCursorLight;
+	private float _rotationInput = 0f;
 
 	protected override void OnUpdate()
 	{
@@ -40,7 +42,8 @@ public sealed class BuyTool : Component
 		}
 		_ghost.CurrentBuildplane = tr.GameObject;
 		var gridSnap = tr.GameObject.Tags.Has( "grid" );
-		UpdateGhostTransform( tr, gridSnap );
+		var rotationInput = GetRotationInput();
+		UpdateGhostTransform( tr, gridSnap, rotationInput );
 		DrawPlacementPlane( tr, gridSnap );
 		if ( _ghost.IsAllowed && Input.Pressed( "attack1" ) )
 		{
@@ -51,6 +54,7 @@ public sealed class BuyTool : Component
 	private void CreateGhost()
 	{
 		var ghostGo = SceneUtility.Instantiate( Product );
+		ghostGo.BreakFromPrefab();
 		_ghost = ghostGo.Components.GetOrCreate<Ghost>();
 		_ghost.Enabled = true;
 		ghostGo.Enabled = true;
@@ -80,7 +84,16 @@ public sealed class BuyTool : Component
 		return tr.Hit;
 	}
 
-	private void UpdateGhostTransform( SceneTraceResult tr, bool gridSnap )
+	private float GetRotationInput()
+	{
+		// Grid products must remain axis-aligned.
+		var isGridProduct = _ghost.Tags.Has( "grid" );
+		var rotationSnap = isGridProduct ? 90f : RotationSnap;
+		_rotationInput += (Input.MouseWheel.y * rotationSnap ) % 360f;
+		return MathF.Round( _rotationInput / rotationSnap ) * rotationSnap;
+	}
+
+	private void UpdateGhostTransform( SceneTraceResult tr, bool gridSnap, float yaw )
 	{
 		var pos = tr.HitPosition;
 		if ( gridSnap )
@@ -92,6 +105,7 @@ public sealed class BuyTool : Component
 		_ghost.Transform.Position = pos;
 		var rotation = Rotation.LookAt( tr.Normal );
 		rotation *= Rotation.FromPitch( 90f );
+		rotation *= Rotation.FromYaw( yaw );
 		_ghost.Transform.Rotation = rotation;
 	}
 

@@ -1,12 +1,12 @@
 {
   "RootObject": {
-    "Id": "26d32c60-1851-4eb8-8285-5591eb7bc785",
+    "Id": "b237459e-4e11-40b9-881b-29d6d8ebaa2e",
     "Name": "16beam",
     "Tags": "solid,grid",
     "Enabled": true,
     "Children": [
       {
-        "Id": "72fa7e28-05b6-4ec8-8f5e-ea3bf7f8734f",
+        "Id": "87a2b950-b715-431a-a494-a8db215bb8d9",
         "Name": "Model",
         "Position": "0,0,32",
         "Scale": "0.32,0.32,1.28",
@@ -25,7 +25,26 @@
         ]
       },
       {
-        "Id": "76470a82-2d0f-4ebb-b8e5-3f3300d5e03b",
+        "Id": "6a21efc5-bbe0-47c3-9743-8040b055587f",
+        "Name": "Model (1)",
+        "Position": "-5.427702,0,66",
+        "Scale": "0.1,0.1,0.1",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__enabled": true,
+            "BodyGroups": 18446744073709551615,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/dev/box.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "Id": "9634052b-8db9-48c3-9f2a-6aa3961fd5a9",
         "Name": "Collider",
         "Position": "0,0,32",
         "Enabled": true,
