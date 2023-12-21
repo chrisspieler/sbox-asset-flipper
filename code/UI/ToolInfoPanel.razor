@@ -1,0 +1,52 @@
+@using System.Collections.Generic;
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+	<div class="title">@ToolName</div>
+    <div class="description">@Description</div>
+    <div id="glyphBar">
+        @foreach ( var glyph in _glyphData )
+        {
+            <InputGlyphControl InputAction="@glyph.InputAction" Description="@glyph.Description" />
+        }
+    </div>
+</root>
+
+@code
+{
+    public string ToolName { get; set; }
+    public string Description { get; set; }
+    private List<InputGlyphData> _glyphData = new();
+
+    protected override int BuildHash() => System.HashCode.Combine( ToolName, Description, _glyphData.Count );
+
+    public void SetTool( string toolName, string description, IEnumerable<InputGlyphData> glyphData )
+    {
+        ToolName = toolName;
+        Description = description;
+        _glyphData.Clear();
+        _glyphData.AddRange( glyphData );
+    }
+
+    public void ClearTool( string toolName )
+    {
+        if ( ToolName != toolName ) return;
+        ToolName = "";
+        Description = "";
+        _glyphData.Clear();
+    }
+
+    public void AddGlyph( InputGlyphData glyph)
+    {
+        _glyphData.Add( glyph );
+        StateHasChanged();
+    }
+
+    public void RemoveGlpyh( string inputAction )
+    {
+        _glyphData.RemoveAll( x => x.InputAction == inputAction );
+        StateHasChanged();
+    }
+}

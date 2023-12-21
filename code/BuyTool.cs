@@ -1,8 +1,10 @@
 using Sandbox;
 using System;
+using System.Collections.Generic;
 
 public sealed class BuyTool : Component
 {
+	[Property] public ToolInfoPanel ToolPanel { get; set; }
 	[Property] public GameObject Product 
 	{
 		get => _product;
@@ -27,6 +29,22 @@ public sealed class BuyTool : Component
 	private Ghost _ghost;
 	private GameObject _activeCursorLight;
 	private float _rotationInput = 0f;
+
+	const string TOOL_NAME = "Buy Tool";
+
+	protected override void OnEnabled()
+	{
+		var glyphList = new List<InputGlyphData>()
+		{
+			new InputGlyphData { InputAction = "attack1", Description = "Place Product" }
+		};
+		ToolPanel.SetTool( TOOL_NAME, "Place assets in the world.", glyphList );
+	}
+
+	protected override void OnDisabled()
+	{
+		ToolPanel.ClearTool( TOOL_NAME );
+	}
 
 	protected override void OnUpdate()
 	{

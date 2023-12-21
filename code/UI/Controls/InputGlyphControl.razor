@@ -1,0 +1,25 @@
+﻿﻿@using Sandbox;
+@using Sandbox.UI;
+@attribute [StyleSheet]
+@inherits Panel
+
+<root>
+    <Image @ref=GlyphTexture/>
+    <div class="description">@(Description ?? InputAction)</div>
+</root>
+
+@code {
+    public string InputAction { get; set; }
+    public string Description { get; set; }
+    private Image GlyphTexture { get; set; }
+
+    protected override void OnAfterTreeRender( bool firstTime )
+    {
+        if ( !firstTime )
+            return;
+
+        GlyphTexture.Texture = Input.GetGlyph( InputAction );
+        
+        StateHasChanged();
+    }
+}

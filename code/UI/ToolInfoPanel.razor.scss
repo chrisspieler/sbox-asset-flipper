@@ -1,0 +1,23 @@
+ToolInfoPanel
+{
+	position: absolute;
+	bottom: 100px;
+	left: 50%;
+	transform: translateX(-50%);
+	flex-direction: column;
+	color: white;
+	font-family: Poppins;
+
+	.title {
+		align-self: center;
+		font-size: 48px;
+	}
+
+	.description {
+        font-size: 28px;
+    }
+
+	#glyphBar {
+		justify-content: center;
+	}
+}

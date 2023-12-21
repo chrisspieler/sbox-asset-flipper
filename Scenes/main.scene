@@ -17,6 +17,10 @@
         {
           "__type": "ModelBrowser",
           "__enabled": false
+        },
+        {
+          "__type": "ToolInfoPanel",
+          "__enabled": true
         }
       ]
     },
@@ -56,6 +60,7 @@
           "GridSnap": 16,
           "Product": "prefabs/16beam.prefab",
           "RotationSnap": 30,
+          "ToolPanel": "077a5747-b85f-4d00-b9c7-e3fca03b1343",
           "TraceDistance": 600
         }
       ],
