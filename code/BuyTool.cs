@@ -177,6 +177,8 @@ public sealed class BuyTool : Component
 
 	private void Buy()
 	{
+		// Persist this GameObject.
+		_ghost.GameObject.Tags.Add( "save" );
 		// Delete just the component, leaving the GameObject intact.
 		_ghost.Destroy();
 		_ghost = null;

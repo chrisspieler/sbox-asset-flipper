@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using System;
+using Sandbox;
 
 public sealed class MenuController : Component
 {
@@ -11,6 +12,17 @@ public sealed class MenuController : Component
 		{
 			ModelMenu.Enabled = !ModelMenu.Enabled;
 			BuyTool.Enabled = !ModelMenu.Enabled;
+		}
+		if ( Input.Pressed( "menu" ) )
+		{
+			if ( Input.Down( "run" ) )
+			{
+				Persistence.Quickload();
+			}
+			else
+			{
+				Persistence.Quicksave();
+			}
 		}
 	}
 }

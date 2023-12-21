@@ -26,6 +26,95 @@
       ]
     },
     {
+      "Id": "0946c1c1-4395-45e4-8889-dc0d09fbf35d",
+      "Name": "Game",
+      "Position": "96.96968,253.3392,57.9539",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "Autosave",
+          "__enabled": true,
+          "IntervalSeconds": 5
+        }
+      ]
+    },
+    {
+      "Id": "47e5441b-2abe-47bb-a7ad-9f1f08b1ecbd",
+      "Name": "Sun",
+      "Position": "23.17903,120.2565,5.858871",
+      "Rotation": "-0.03595976,0.4469008,-0.07169209,0.8909806",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "DirectionalLight",
+          "__enabled": true,
+          "LightColor": "0.91373,0.98039,1,1",
+          "Shadows": true,
+          "SkyColor": "0.05882,0.07451,0.08235,1"
+        }
+      ]
+    },
+    {
+      "Id": "6c5f6bd1-2bc2-4fed-abea-418d2f5cccce",
+      "Name": "Skybox",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "SkyBox2D",
+          "__enabled": true,
+          "SkyMaterial": "materials/skybox/lilienstein.vmat",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "Id": "4bdc5371-8c1a-44b9-80c7-a358056e9b0b",
+      "Name": "Plane",
+      "Scale": "10,10,1",
+      "Tags": "solid,buildplane,grid",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "__enabled": true,
+          "BodyGroups": 18446744073709551615,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/dev/plane.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "BoxCollider",
+          "__enabled": true,
+          "Center": "0,0,0",
+          "IsTrigger": false,
+          "Scale": "100,100,0.25",
+          "Static": false,
+          "Surface": null
+        }
+      ]
+    },
+    {
+      "Id": "9525339e-2b69-4979-a38d-ee48bd444b5e",
+      "Name": "Envmap",
+      "Position": "0,0,72",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "EnvmapProbe",
+          "__enabled": true,
+          "Bounds": {
+            "Mins": "-500,-500,-72",
+            "Maxs": "500,500,200"
+          },
+          "Projection": "Sphere",
+          "Texture": "textures/cubemaps/default2.vtex",
+          "TintColor": "1,1,1,1"
+        }
+      ]
+    },
+    {
       "Id": "ff849f8d-ae17-4ff4-838f-1d5078371152",
       "Name": "Player",
       "Rotation": "-0.00000003191234,0.000000000000007521388,-0.5353999,-0.8445991",
@@ -96,63 +185,6 @@
       ]
     },
     {
-      "Id": "4bdc5371-8c1a-44b9-80c7-a358056e9b0b",
-      "Name": "Plane",
-      "Scale": "10,10,1",
-      "Tags": "solid,buildplane,grid",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "ModelRenderer",
-          "__enabled": true,
-          "BodyGroups": 18446744073709551615,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/dev/plane.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "BoxCollider",
-          "__enabled": true,
-          "Center": "0,0,0",
-          "IsTrigger": false,
-          "Scale": "100,100,0.25",
-          "Static": false,
-          "Surface": null
-        }
-      ]
-    },
-    {
-      "Id": "47e5441b-2abe-47bb-a7ad-9f1f08b1ecbd",
-      "Name": "Sun",
-      "Position": "23.17903,120.2565,5.858871",
-      "Rotation": "-0.03595976,0.4469008,-0.07169209,0.8909806",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "DirectionalLight",
-          "__enabled": true,
-          "LightColor": "0.91373,0.98039,1,1",
-          "Shadows": true,
-          "SkyColor": "0.05882,0.07451,0.08235,1"
-        }
-      ]
-    },
-    {
-      "Id": "6c5f6bd1-2bc2-4fed-abea-418d2f5cccce",
-      "Name": "Skybox",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "SkyBox2D",
-          "__enabled": true,
-          "SkyMaterial": "materials/skybox/lilienstein.vmat",
-          "Tint": "1,1,1,1"
-        }
-      ]
-    },
-    {
       "Id": "260b4123-acba-4c58-8db2-91ba913d5af9",
       "Name": "Music",
       "Position": "2.539715,-319.3538,247.9572",
@@ -167,25 +199,6 @@
           "PlaybackPosition": 0,
           "Track": null,
           "Volume": 0
-        }
-      ]
-    },
-    {
-      "Id": "9525339e-2b69-4979-a38d-ee48bd444b5e",
-      "Name": "Object",
-      "Position": "0,0,72",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "EnvmapProbe",
-          "__enabled": true,
-          "Bounds": {
-            "Mins": "-500,-500,-72",
-            "Maxs": "500,500,200"
-          },
-          "Projection": "Sphere",
-          "Texture": "textures/cubemaps/default2.vtex",
-          "TintColor": "1,1,1,1"
         }
       ]
     }
