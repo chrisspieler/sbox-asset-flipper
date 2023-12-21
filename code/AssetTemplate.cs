@@ -11,11 +11,15 @@ public static class AssetTemplate
 		Log.Info( $"({package.Title}) Loading model: {modelPath}" );
 		await packageInfo.MountAsync();
 		var model = Model.Load( modelPath );
-		var go = new GameObject( false, "Model Prefab" );
-		var renderer = go.Components.Create<ModelRenderer>();
+		var go = new GameObject( false, packageInfo.Title );
+		var modelGo = new GameObject( true, "Model" );
+		modelGo.SetParent( go );
+		var renderer = modelGo.Components.Create<ModelRenderer>();
 		renderer.Model = model;
-		var collider = go.Components.Create<ModelCollider>();
+		var collider = modelGo.Components.Create<ModelCollider>();
 		collider.Model = model;
+		var physMins = packageInfo.GetMeta<Vector3>( "PhysicsMins" );
+		modelGo.Transform.Position += Vector3.Zero.WithZ( -physMins.z );
 		return go;
 	}
 }
