@@ -2,7 +2,7 @@
   "GameObjects": [
     {
       "Id": "077a5747-b85f-4d00-b9c7-e3fca03b1343",
-      "Name": "Screen",
+      "Name": "Menus",
       "Position": "2.539715,-319.3538,247.9572",
       "Enabled": true,
       "Components": [
@@ -16,7 +16,7 @@
         },
         {
           "__type": "ModelBrowser",
-          "__enabled": true
+          "__enabled": false
         }
       ]
     },
@@ -53,7 +53,7 @@
           "__enabled": true,
           "CursorLight": "prefabs/cursor_light.prefab",
           "Eyes": "148db08c-865c-4ee9-9582-e2a13a79016c",
-          "GridSnap": 8,
+          "GridSnap": 16,
           "Product": "prefabs/16beam.prefab",
           "RotationSnap": 30,
           "TraceDistance": 600

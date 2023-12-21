@@ -98,15 +98,22 @@ public sealed class BuyTool : Component
 		var pos = tr.HitPosition;
 		if ( gridSnap )
 		{
-			pos.x = MathF.Round( pos.x / GridSnap ) * GridSnap;
-			pos.y = MathF.Round( pos.y / GridSnap ) * GridSnap;
-			pos.z = MathF.Round( pos.z / GridSnap ) * GridSnap;
+			pos.x = GetSnap( pos.x, tr.Normal, Vector3.Forward );
+			pos.y = GetSnap( pos.y, tr.Normal, Vector3.Right );
+			pos.z = GetSnap( pos.z, tr.Normal, Vector3.Up );
 		}
 		_ghost.Transform.Position = pos;
 		var rotation = Rotation.LookAt( tr.Normal );
 		rotation *= Rotation.FromPitch( 90f );
 		rotation *= Rotation.FromYaw( yaw );
 		_ghost.Transform.Rotation = rotation;
+	}
+
+	private float GetSnap( float value, Vector3 normal, Vector3 axis )
+	{
+		// If the normal is parallel to the axis, just use the hit position.
+		if ( MathF.Abs( normal.Dot( axis ) ) > 0.9f ) return value;
+		return MathF.Round( value / GridSnap ) * GridSnap;
 	}
 
 	private void DrawPlacementPlane( SceneTraceResult tr, bool useGrid )
