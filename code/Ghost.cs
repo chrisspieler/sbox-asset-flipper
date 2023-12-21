@@ -43,7 +43,7 @@ public sealed class Ghost : Component
 	protected override void OnDisabled()
 	{
 		Tags.Remove( "ghost" );
-		Tags.Add( "buildplane" );
+		Tags.Add( "solid" );
 
 		foreach( var renderer in GetRenderers )
 		{

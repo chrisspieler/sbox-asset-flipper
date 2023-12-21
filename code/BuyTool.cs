@@ -78,7 +78,7 @@ public sealed class BuyTool : Component
 		var ray = new Ray( Eyes.Transform.Position, Eyes.Transform.Rotation.Forward );
 		tr = Scene.Trace
 			.Ray( ray, TraceDistance )
-			.WithTag( "buildplane" )
+			.WithTag( "solid" )
 			.WithoutTags( "ghost" )
 			.Run();
 		return tr.Hit;
