@@ -22,6 +22,10 @@
         {
           "__type": "ToolInfoPanel",
           "__enabled": true
+        },
+        {
+          "__type": "SystemMenuPanel",
+          "__enabled": false
         }
       ]
     },
@@ -141,7 +145,9 @@
           "__type": "MenuController",
           "__enabled": true,
           "BuyTool": "ff849f8d-ae17-4ff4-838f-1d5078371152",
-          "ModelMenu": "077a5747-b85f-4d00-b9c7-e3fca03b1343"
+          "IsMenuOpen": false,
+          "ModelMenu": "077a5747-b85f-4d00-b9c7-e3fca03b1343",
+          "SystemMenu": "077a5747-b85f-4d00-b9c7-e3fca03b1343"
         },
         {
           "__type": "BuyTool",

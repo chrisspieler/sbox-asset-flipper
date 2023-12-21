@@ -1,0 +1,43 @@
+SystemMenuPanel
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	pointer-events: all;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #000000FC;
+	backdrop-filter: blur(10px);
+	font-family: Poppins;
+	color: white;
+
+	&:intro {
+		background-color: transparent;
+		backdrop-filter: blur(0px);
+	}
+
+	.transition {
+        transition: all 0.5s ease-in-out;
+    }
+
+	.title {
+		font-size: 96px;
+	}
+
+
+	#optionList {
+		flex-direction: column;
+		align-items: center;
+
+		.option {
+			font-size: 36px;
+			padding: 20px;
+
+			&:hover {
+				cursor: pointer;
+				background-color: #FFFFFF10;
+			}
+		}
+	}
+}

@@ -1,0 +1,25 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+
+<root>
+    <div class="title">Asset Flipper</div>
+    <div id="optionList">
+        <div class="option" onclick=@(() => { Enabled = false; })>Resume</div>
+        <div class="option" onclick=@(() => Persistence.Quicksave())>Quicksave</div>
+        <div class="option">Save/Load</div>
+        <div class="option">Options</div>
+        <div class="option" onclick=@(() => IGameInstance.Current.Close())>Quit</div>
+    </div>
+	
+    <div 
+</root>
+
+@code
+{
+
+	/// <summary>
+	/// the hash determines if the system should be rebuilt. If it changes, it will be rebuilt
+	/// </summary>
+	protected override int BuildHash() => System.HashCode.Combine( 1 );
+}
